@@ -107,12 +107,12 @@ class BulkV2Client(BulkClient):
         resp = requests.put(self.protocol + self.hostName + "/" + self.contentUrl,
                             data=batchData,
                             headers={'Authorization': 'Bearer ' + self.sid, 'content-type':'text/csv'})
-
         # Mark the job upload complete
         resp = requests.patch(self.protocol + self.hostName + self.BULK_V2_URL + '/' + jobId,
-                       data='{"state":"UploadComplete"}',
-                       headers={'Authorization': 'Bearer ' + self.sid, 'content-type':'application/json'})
-
+                              data='{"state":"UploadComplete"}',
+                              headers={'Authorization': 'Bearer ' + self.sid,
+                                       'content-type':'application/json'})
+        
         t1 = time.time()
         self.logger.logBatch("New Content", t1 - t0)
 

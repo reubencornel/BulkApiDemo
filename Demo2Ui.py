@@ -80,11 +80,10 @@ class Application(tk.Frame):
             self.v2Pane.label.config(text="Post Job Representation to /services/data/v40.0/jobs/ingest");
         elif (currentSelection == CREATE_BATCHES):
             self.v2Pane.label.config(justify=tk.CENTER);
-            self.v2Pane.label.config(text="Put file to the content url");
+            self.v2Pane.label.config(text="Put file to the content url and\nMark the job upload complete");
         elif (currentSelection == CLOSE_JOB):
             self.v2Pane.label.config(justify = tk.CENTER);
-            self.v2Pane.label.config(text="Mark the Job to indicate that the upload is completed");
-
+            self.v2Pane.label.config(text="Bulk API V2 does not need this state");
 
 class BulkApiDemoPane:
     def __init__(self, frame, row, column, bindingFunction=None):
