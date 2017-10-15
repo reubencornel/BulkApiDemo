@@ -6,7 +6,7 @@ import requests
 
 AUTHENTICATING = "Authenticating"
 CREATE_JOB = "CreateJob"
-CREATE_BATCHES = "CreateBatches"
+CREATE_BATCHES = "AddContent"
 CLOSE_JOB = "CloseJob"
 
 class BulkApiOrchestrator:

@@ -6,7 +6,7 @@ from BulkClient import BulkApiOrchestrator, BulkV1Client, BulkV2Client
 
 AUTHENTICATING = "Authenticating"
 CREATE_JOB = "CreateJob"
-CREATE_BATCHES = "CreateBatches"
+CREATE_BATCHES = "AddContent"
 CLOSE_JOB = "CloseJob"
 
 class Application(tk.Frame):
@@ -62,28 +62,28 @@ class Application(tk.Frame):
         currentSelection = event.widget.selection()[0];
         if (currentSelection == CREATE_JOB):
             self.v1Pane.label.config(justify = tk.CENTER);
-            self.v1Pane.label.config(text="Post Job Representation to /services/async/38.0/job");
+            self.v1Pane.label.config(text="Post Job Representation to /services/async/40.0/job");
         elif (currentSelection == CREATE_BATCHES):
             self.v1Pane.label.config(justify=tk.LEFT);
             self.v1Pane.label.config(text="For all lines in the file\n"+
                                      "     Validate if the line meets classic bulk parameters\n" +
                                      "     Validate if we have not hit the batch size\n" +
-                                     "     Post to /services/async/38.0/job/jobId/batch");
+                                     "     Post to /services/async/40.0/job/jobId/batch");
         elif (currentSelection == CLOSE_JOB):
             self.v1Pane.label.config(justify = tk.CENTER);
-            self.v1Pane.label.config(text="Post Job Representation to /services/async/38.0/job/jobId");
+            self.v1Pane.label.config(text="Post Job Representation to /services/async/40.0/job/jobId");
 
     def v2PaneCallBack(self, event):
         currentSelection = event.widget.selection()[0];
         if (currentSelection == CREATE_JOB):
             self.v2Pane.label.config(justify = tk.CENTER);
-            self.v2Pane.label.config(text="Post Job Representation to /services/data/v38.0/bulk/jobs");
+            self.v2Pane.label.config(text="Post Job Representation to /services/data/v40.0/jobs/ingest");
         elif (currentSelection == CREATE_BATCHES):
             self.v2Pane.label.config(justify=tk.CENTER);
-            self.v2Pane.label.config(text="Post Batch File to\n/services/data/v38.0/bulk/jobs/jobId/batches");
+            self.v2Pane.label.config(text="Put file to the content url");
         elif (currentSelection == CLOSE_JOB):
             self.v2Pane.label.config(justify = tk.CENTER);
-            self.v2Pane.label.config(text="Patch Job Representation at \n /services/data/v38.0/bulk/jobs/jobId");
+            self.v2Pane.label.config(text="Mark the Job to indicate that the upload is completed");
 
 
 class BulkApiDemoPane:
@@ -105,7 +105,7 @@ class BulkApiDemoPane:
         tree.heading("Time", text="Elapsed Time (msec)");
         tree.insert("", "end", iid=AUTHENTICATING, text=" Authenticating", image=self.attentionImage, tags="Header")
         tree.insert("", "end", iid=CREATE_JOB, text=" Create Job", image=self.attentionImage, tags="Header")
-        tree.insert("", "end", iid=CREATE_BATCHES, text=" Create Batches", image=self.attentionImage, tags="Header")
+        tree.insert("", "end", iid=CREATE_BATCHES, text=" Add Content ", image=self.attentionImage, tags="Header")
         tree.insert("", "end", iid=CLOSE_JOB, text=" Close Job", tags="Header", image=self.attentionImage)
         tree.tag_configure("Header", None, font=("Helvetica", "14"))
         tree.bind('<<TreeviewSelect>>', self.bindingFunction)
