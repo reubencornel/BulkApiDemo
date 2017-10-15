@@ -59,6 +59,7 @@ class SalesforceLogin:
         root = ET.fromstring(response.read())
         if (response.status == 200):
             self.sessionId = self.parseResponse(root)
+            print ("Session Id: " + self.sessionId)
             self.authenticated = True
         else:
             self.errorMessage = self.parseErrorResponse(root)
@@ -141,7 +142,6 @@ class BulkOperation:
         return self.jobId
 
     def closeJobStatus(self):
-        print ("CLOSING JOB")
         body = '''<?xml version="1.0" encoding="UTF-8"?>
 <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload">
   <state>Closed</state>
@@ -149,16 +149,11 @@ class BulkOperation:
         headers = self.getHeaders();
         headers["Content-Type"] = "application/xml"
         status, response = self.makeHttpCall("POST", self.endpoint + "job/" + self.jobId, body, headers)
-        print (status)
-        print (response)
 
     def getJobStatus(self, jobId=None):
-        print ("GETTING JOB")
         if (jobId == None):
             jobId = self.jobId
         status, response = self.makeHttpCall("GET", self.endpoint + "job/" + jobId, "", self.getHeaders())
-        print (status)
-        print (response)
 
     def postRecords(self, fileObj, contentType="text/csv", jobId = None):
 
@@ -183,8 +178,7 @@ class BulkOperation:
         if (status == 200):
             root = ET.fromstring(response)
             return findNode(root.getchildren(), '{http://www.force.com/2009/06/asyncapi/dataload}id')
-        else:
-            print (response)
+
         return None
 
     def queryBulk(self, sobject, query):
