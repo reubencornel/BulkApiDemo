@@ -130,7 +130,6 @@ class BulkV1Client(BulkClient):
         t0 = time.time()
         jobId = self.bulkOperation.createOperation("insert", "Account", "CSV")
         t1 = time.time()
-        print ("JOB ID:" + jobId)
         return (jobId, t1 - t0)
 
     def uploadContent(self, jobId, inputFile):

@@ -125,9 +125,6 @@ class BulkApiDemoPane:
         self.treeView.item(stageName, None, values=(str(total)))
 
     def insertItem(self, stage, objectId, time):
-        print ("TIME: " + str(time))
-        print ("OBJECT:" + str(objectId))
-        print ("STAGE:" + str(stage))
         self.treeView.insert(stage, "end", text=objectId, iid=objectId, values=(str(time)))
 
 if __name__ == "__main__":
